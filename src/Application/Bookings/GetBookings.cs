@@ -6,8 +6,6 @@ using FYP.Application.Common.Models;
 using FYP.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 using FYP.Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection.Bookings;
@@ -21,19 +19,15 @@ public class GetTodoItemsWithPaginationQueryHandler :IRequestHandler<GetBookings
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
     private readonly ICurrentUserService _currentUserService;
-    private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IIdentityService _identityService;
 
     public GetTodoItemsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper, 
-        ICurrentUserService currentUserService, RoleManager<IdentityRole> roleManager, IHttpContextAccessor httpContextAccessor,
+        ICurrentUserService currentUserService,
         IIdentityService identityService)
     {
         _context = context;
         _mapper = mapper;
         _currentUserService = currentUserService;
-        _roleManager = roleManager;
-        _httpContextAccessor = httpContextAccessor;
         _identityService = identityService;
     }
 
