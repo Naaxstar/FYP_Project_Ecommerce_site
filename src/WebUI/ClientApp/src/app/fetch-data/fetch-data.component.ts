@@ -1,16 +1,33 @@
-import { Component } from '@angular/core';
-import { WeatherForecastClient, WeatherForecast } from '../web-api-client';
+import {Component, OnInit} from '@angular/core';
+import {WeatherForecastClient, WeatherForecast, BookingClient, Booking, GetBookings} from '../web-api-client';
 
 @Component({
   selector: 'app-fetch-data',
   templateUrl: './fetch-data.component.html'
 })
-export class FetchDataComponent {
-  public forecasts: WeatherForecast[] = [];
+export class FetchDataComponent implements OnInit{
+  public bookings: Booking[] = [];
+  deleteId: number;
 
-  constructor(private client: WeatherForecastClient) {
-    client.get().subscribe(result => {
-      this.forecasts = result;
+  constructor(private BookingClient: BookingClient) {
+
+  }
+
+  deleteItem() {
+    this.BookingClient.delete(this.deleteId).subscribe(result => {
+      console.log('delete success')
+      this.getBookings()
+    }, error => console.error(error));
+  }
+
+  ngOnInit(): void {
+    this.getBookings()
+  }
+
+  getBookings () {
+    let bookingquery = new GetBookings()
+    this.BookingClient.getBookings(bookingquery).subscribe(result => {
+      this.bookings = result;
     }, error => console.error(error));
   }
 }
