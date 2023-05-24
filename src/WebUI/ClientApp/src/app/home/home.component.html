@@ -1,14 +1,82 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
-</ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+<html>
+<body>
+<style>
+  header {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(./assets/bannerIndex.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+  }
+</style>
+<head>
+  <meta name="viewport" content="with=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="./home.component.scss">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,600&display=swap" rel="stylesheet">
+</head>
+<header>
+  <div class="text-box" >
+    <h1>MUSLIMAH STREET APPAREL</h1>
+    <p>"If you love something, wear it all the time. Find things that suit you. That's how you look extraordinary and being well-dressed hasn't much to do with having good clothes. It's a question of good balance and good common sense."</p>
+  </div>
+
+</header>
+
+<!--smallbox-->
+
+<section class="smallbox">
+  <h1>LEARN MORE ABOUT</h1>
+  <div class="row">
+    <div class="box-col">
+      <h3>Shariah Compliant</h3>
+      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+      <a class="more-btn" [routerLink]='["/information"]'>EXPLORE MORE</a>
+    </div>
+
+    <div class="box-col">
+      <h3>Skin Tone & Sizing</h3>
+      <p>t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+      <a class="more-btn" [routerLink]='["/information"]'>EXPLORE MORE</a>
+    </div>
+
+    <div class="box-col">
+      <h3>Fast Fashion</h3>
+      <p>t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+      <a class="more-btn" [routerLink]='["/information"]'>EXPLORE MORE</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="fstyle">
+  <h1>REFERENCE STYLE</h1>
+  <div class="row">
+    <div class="fstyle-col">
+      <img src="./assets/dress3.JPG" alt="dd">
+      <h3>Dress</h3>
+      <p>A dress is a garment traditionally worn by women or girls consisting of a skirt with an attached bodice (or a matching bodice giving the effect of a one-piece garment). It consists of a top piece that covers the torso and hangs down over the legs. A dress can be any one-piece garment containing a skirt of any length, and can be formal or casual.</p>
+      <a href="dress.html" class="more-btn">EXPLORE MORE</a>
+    </div>
+
+    <div class="fstyle-col">
+      <img src="./assets/kurung6.JPG" alt="kurung6">
+      <h3>Baju Kurung</h3>
+      <p>Baju Kurung is a traditional costume of Malays and traditionally worn by women in Brunei, Indonesia, Malaysia, Singapore and southern Thailand. This type of traditional costume is the national dress of Brunei and Malaysia. In Indonesia, it is also one of the regional dresses, seen most on the island of Sumatra, where many ethnic Malay and Minangkabau women wear it.</p>
+      <a href="bajukurung.html" class="more-btn">EXPLORE MORE</a>
+    </div>
+
+    <div class="fstyle-col">
+      <img src="./assets/tudung8.png">
+      <h3>Hijab</h3>
+      <p>Hijab generally refers to headcoverings worn by Muslim women. Many Muslims believe it is obligatory for every female Muslim who has reached the age of puberty to wear a head covering. While such headcoverings can come in many forms, hijab often specifically refers to a cloth wrapped around the head, neck and chest, covering the hair and neck but leaving the face visible.</p>
+      <a href="./information.component.html" class="more-btn">EXPLORE MORE</a>
+    </div>
+  </div>
+
+</section>
+</body>
+</html>
