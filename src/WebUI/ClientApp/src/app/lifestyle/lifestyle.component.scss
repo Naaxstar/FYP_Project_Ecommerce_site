@@ -1,0 +1,58 @@
+/*----------------style--------------*/
+
+h1{
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.fstyle {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.fstyle-col{
+  flex-basis: 31%;
+  border-radius: 10px;
+  margin-bottom: 5%;
+  text-align: left;
+}
+
+.fstyle-col img{
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.fstyle-col p {
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.fstyle-col h3 {
+  margin-top: 16px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.more-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  border: 1px solid #f44336;
+  padding: 12px 34px;
+  font-size: 13px;
+  background: #f44336;
+  position: relative;
+  cursor: pointer;
+}
+
+.more-btn:hover {
+  border: 1px solid #f44336;
+  background: #fff;
+  color: #f44336;
+  transition: 1s;
+}
+
+
