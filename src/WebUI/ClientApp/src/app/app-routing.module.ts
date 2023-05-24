@@ -12,16 +12,17 @@ import {LifestyleComponent} from "./lifestyle/lifestyle.component";
 import {DressComponent} from "./dress/dress.component";
 import {BajukurungComponent} from "./bajukurung/bajukurung.component";
 import {HijabComponent} from "./hijab/hijab.component";
+import {ServicesComponent} from "./services/services.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'enlightment', component: EnlightmentComponent},
+  { path: 'enlightment', component: EnlightmentComponent  },
   { path: 'information', component: InformationComponent},
   { path: 'lifestyle', component: LifestyleComponent},
   { path: 'dress', component: DressComponent},
   { path: 'bajukurung', component: BajukurungComponent},
   { path: 'hijab', component: HijabComponent},
-  { path: 'counter', component: CounterComponent },
+  { path: 'services', component: ServicesComponent },
   { path: 'fetch-data', component: FetchDataComponent },
   { path: 'todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
   { path: 'token', component: TokenComponent, canActivate: [AuthorizeGuard] }

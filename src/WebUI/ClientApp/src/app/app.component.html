@@ -1,5 +1,10 @@
 <body>
   <app-nav-menu></app-nav-menu>
+  <div class="header-container" >
+    <img class='header-image' [src]="headerImage" alt="">
+    <h1 class="first-message">{{headerMessage}}</h1>
+    <p>"If you love something, wear it all the time. Find things that suit you. That's how you look extraordinary and being well-dressed hasn't much to do with having good clothes. It's a question of good balance and good common sense."</p>
+  </div>
   <main class="container">
     <router-outlet></router-outlet>
   </main>

@@ -1,0 +1,59 @@
+<section class="education" *ngIf="">
+  <div class="row">
+    <div class="edu-col">
+      <img style="height: 330px;  width: 90%;" src="../../assets/consultation.jpeg">
+    </div>
+    <div class="edu-col">
+      <h1>BOOK AN APPOINTMENT &amp; CONSULTATION</h1>
+      <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in
+        some form, by injected humour,
+        or randomised words which don't look even slightly believable.
+        If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden
+        in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as
+        necessary.
+      </p>
+      <!----masuk direct aini--->
+      <a class="more-btn" [routerLink]='["/authentication/login"]'>SUBSCRIBE WITH US NOW</a>
+    </div>
+  </div>
+</section>
+
+<div class="form-container">
+  <div class="input-container">
+    <div>Services</div>
+    <select [(ngModel)]="serviceName" class="select" (change)="onValueChange(serviceName)">
+      <option *ngFor="let s of servicesType" [value]="s">
+        {{s}}
+      </option>
+    </select>
+  </div>
+
+  <div class="input-container">
+    <div>Date</div>
+    <input type="text" [(ngModel)]="date">
+  </div>
+  <div class="input-container">
+    <div>time</div>
+    <input type="text" [(ngModel)]="time">
+  </div>
+  <div class="input-container">
+    <div>firstName</div>
+    <input type="text" [(ngModel)]="firstName">
+  </div>
+  <div class="input-container">
+    <div>lastName</div>
+    <input type="text" [(ngModel)]="lastName">
+  </div>
+  <div class="input-container">
+    <div>phoneNumber</div>
+    <input type="text" [(ngModel)]="phoneNumber">
+  </div>
+
+  <div>
+    <button (click)="createBooking()" style="width: 120px;height: 80px;background-color: #5f5fb7">
+      Create Booking
+    </button>
+  </div>
+
+</div>
+

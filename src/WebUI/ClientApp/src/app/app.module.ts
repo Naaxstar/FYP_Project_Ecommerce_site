@@ -20,6 +20,7 @@ import { LifestyleComponent } from './lifestyle/lifestyle.component';
 import { DressComponent } from './dress/dress.component';
 import { BajukurungComponent } from './bajukurung/bajukurung.component';
 import { HijabComponent } from './hijab/hijab.component';
+import { ServicesComponent } from './services/services.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HijabComponent } from './hijab/hijab.component';
     LifestyleComponent,
     DressComponent,
     BajukurungComponent,
-    HijabComponent
+    HijabComponent,
+    ServicesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

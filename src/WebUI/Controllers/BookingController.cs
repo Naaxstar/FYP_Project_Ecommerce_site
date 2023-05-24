@@ -1,4 +1,5 @@
-﻿using FYP.Application.TodoItems.Commands.DeleteTodoItem;
+﻿using FYP.Application.Bookings;
+using FYP.Application.TodoItems.Commands.DeleteTodoItem;
 using FYP.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,5 +22,17 @@ public class BookingController : ApiControllerBase
         await Mediator.Send(new DeleteBooking(id));
 
         return NoContent();
+    }
+
+    [HttpPost("CreateBooking")]
+    public async Task<ActionResult> CreateBooking([FromBody] CreateBooking booking)
+    {
+       return Ok(await Mediator.Send(booking));
+    }
+    
+    [HttpPost("UpdateBooking")]
+    public async Task<ActionResult> UpdateBooking([FromBody] UpdateBooking booking)
+    {
+       return Ok(await Mediator.Send(booking));
     }
 }

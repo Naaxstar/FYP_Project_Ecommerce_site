@@ -18,6 +18,8 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 export interface IBookingClient {
     getBookings(command: GetBookings | null | undefined): Observable<Booking[]>;
     delete(id: number): Observable<FileResponse>;
+    createBooking(booking: CreateBooking): Observable<FileResponse>;
+    updateBooking(booking: UpdateBooking): Observable<FileResponse>;
 }
 
 @Injectable({
@@ -120,6 +122,118 @@ export class BookingClient implements IBookingClient {
     }
 
     protected processDelete(response: HttpResponseBase): Observable<FileResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
+            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
+            if (fileName) {
+                fileName = decodeURIComponent(fileName);
+            } else {
+                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            }
+            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    createBooking(booking: CreateBooking): Observable<FileResponse> {
+        let url_ = this.baseUrl + "/api/Booking/CreateBooking";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(booking);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateBooking(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateBooking(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FileResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FileResponse>;
+        }));
+    }
+
+    protected processCreateBooking(response: HttpResponseBase): Observable<FileResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
+            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
+            if (fileName) {
+                fileName = decodeURIComponent(fileName);
+            } else {
+                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            }
+            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    updateBooking(booking: UpdateBooking): Observable<FileResponse> {
+        let url_ = this.baseUrl + "/api/Booking/UpdateBooking";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(booking);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdateBooking(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdateBooking(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FileResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FileResponse>;
+        }));
+    }
+
+    protected processUpdateBooking(response: HttpResponseBase): Observable<FileResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -911,8 +1025,13 @@ export interface IBaseAuditableEntity extends IBaseEntity {
 
 export class Booking extends BaseAuditableEntity implements IBooking {
     id?: number;
-    name?: string;
+    serviceName?: string;
     price?: number;
+    date?: string;
+    time?: string;
+    firstName?: string;
+    lastName?: string;
+    phoneNumber?: string;
 
     constructor(data?: IBooking) {
         super(data);
@@ -922,8 +1041,13 @@ export class Booking extends BaseAuditableEntity implements IBooking {
         super.init(_data);
         if (_data) {
             this.id = _data["id"];
-            this.name = _data["name"];
+            this.serviceName = _data["serviceName"];
             this.price = _data["price"];
+            this.date = _data["date"];
+            this.time = _data["time"];
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.phoneNumber = _data["phoneNumber"];
         }
     }
 
@@ -937,8 +1061,13 @@ export class Booking extends BaseAuditableEntity implements IBooking {
     override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["name"] = this.name;
+        data["serviceName"] = this.serviceName;
         data["price"] = this.price;
+        data["date"] = this.date;
+        data["time"] = this.time;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["phoneNumber"] = this.phoneNumber;
         super.toJSON(data);
         return data;
     }
@@ -946,8 +1075,13 @@ export class Booking extends BaseAuditableEntity implements IBooking {
 
 export interface IBooking extends IBaseAuditableEntity {
     id?: number;
-    name?: string;
+    serviceName?: string;
     price?: number;
+    date?: string;
+    time?: string;
+    firstName?: string;
+    lastName?: string;
+    phoneNumber?: string;
 }
 
 export abstract class BaseEvent implements IBaseEvent {
@@ -1006,6 +1140,106 @@ export class GetBookings implements IGetBookings {
 }
 
 export interface IGetBookings {
+}
+
+export class CreateBooking implements ICreateBooking {
+    id?: number;
+    serviceName?: string;
+    price?: number;
+    date?: string;
+    time?: string;
+    firstName?: string;
+    lastName?: string;
+    phoneNumber?: string;
+
+    constructor(data?: ICreateBooking) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.serviceName = _data["serviceName"];
+            this.price = _data["price"];
+            this.date = _data["date"];
+            this.time = _data["time"];
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.phoneNumber = _data["phoneNumber"];
+        }
+    }
+
+    static fromJS(data: any): CreateBooking {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateBooking();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["serviceName"] = this.serviceName;
+        data["price"] = this.price;
+        data["date"] = this.date;
+        data["time"] = this.time;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["phoneNumber"] = this.phoneNumber;
+        return data;
+    }
+}
+
+export interface ICreateBooking {
+    id?: number;
+    serviceName?: string;
+    price?: number;
+    date?: string;
+    time?: string;
+    firstName?: string;
+    lastName?: string;
+    phoneNumber?: string;
+}
+
+export class UpdateBooking implements IUpdateBooking {
+    booking?: Booking;
+
+    constructor(data?: IUpdateBooking) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.booking = _data["booking"] ? Booking.fromJS(_data["booking"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): UpdateBooking {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateBooking();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["booking"] = this.booking ? this.booking.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IUpdateBooking {
+    booking?: Booking;
 }
 
 export class PaginatedListOfTodoItemBriefDto implements IPaginatedListOfTodoItemBriefDto {

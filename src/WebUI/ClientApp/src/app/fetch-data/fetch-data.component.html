@@ -16,12 +16,12 @@
       <th>Price</th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let booking of bookings">
+  <tbody *ngIf="bookings.length">
+    <<!--tr *ngFor="let booking of bookings">
       <td>{{ booking.id }}</td>
       <td>{{ booking.name }}</td>
       <td>{{ booking.price }}</td>
-    </tr>
+    </tr>-->
   </tbody>
 </table>
 
