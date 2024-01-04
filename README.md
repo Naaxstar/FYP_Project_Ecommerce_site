@@ -86,6 +86,9 @@ HTTPS (Secure Hypertext Transfer Protocol) is used to protect website traffic an
 > Self-signed ssl certificates <br>
 <img width="1071" alt="Screenshot 2023-06-12 at 12 52 27 PM" src="https://github.com/Naaxstar/FYP_Project_Ecommerce_site/assets/117069737/1357cd68-f523-4ecc-9954-4f5b6b4ab227">
 
+> URL encrypted
+<img width="958" alt="Screenshot 2023-05-29 at 4 27 46 PM" src="https://github.com/Naaxstar/FYP_Project_Ecommerce_site/assets/117069737/71309f8e-a94c-4aaf-89f0-e0c60f71fa71">
+
 > Certification authentication <br>
 <img width="1404" alt="Screenshot 2023-06-11 at 2 36 46 PM" src="https://github.com/Naaxstar/FYP_Project_Ecommerce_site/assets/117069737/85e58444-5452-4ea7-bf02-570edff50a95">
 
@@ -136,4 +139,7 @@ User input sanitization is a critical security practice that involves validating
   
 <img width="940" alt="Screenshot 2023-06-12 at 2 24 08 AM" src="https://github.com/Naaxstar/FYP_Project_Ecommerce_site/assets/117069737/8748450d-732d-4fc6-8834-9281d1ea6bd1">
 
+# Special thank ❤️‍🔥
+
+Whole heartedly wishing best regards to @tuanfarhancs & freedyTMC for making this project possible, i could'nt have done this without you guys ❤️
 
