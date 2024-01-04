@@ -40,6 +40,8 @@ ADS is used for ease of data management and monitoring, nontheless you may use d
 ### Docker container
 This repository provides a ready-to-use Docker container for Microsoft SQL Server 2019, making it easy to deploy and manage your database in various environments. <br>
 
+<img width="1264" alt="Screenshot 2023-06-12 at 2 02 07 PM" src="https://github.com/Naaxstar/FYP_Project_Ecommerce_site/assets/117069737/1d6f3f4b-f3bf-4b4d-87ca-1d98ac33200f">
+
 ### Bold Rosalind: Containerized Microsoft SQL Server 2019
 
  This repository provides a ready-to-use Docker container for Microsoft SQL Server 2019, making it easy to deploy and manage your database in various environments.
@@ -71,3 +73,13 @@ Password: `[Initial password found in container logs]`
 ### Need Help?
 
 Refer to the official SQL Server documentation: [https://learn.microsoft.com/en-us/sql/sql-server/?view=sql-server-ver16]
+
+## 2. Security
+
+### HTTPS (SSL/TLS)
+Self-signed ssl certificates <br>
+<img width="1071" alt="Screenshot 2023-06-12 at 12 52 27 PM" src="https://github.com/Naaxstar/FYP_Project_Ecommerce_site/assets/117069737/1357cd68-f523-4ecc-9954-4f5b6b4ab227">
+
+Certification authentication <br>
+<img width="1404" alt="Screenshot 2023-06-11 at 2 36 46 PM" src="https://github.com/Naaxstar/FYP_Project_Ecommerce_site/assets/117069737/85e58444-5452-4ea7-bf02-570edff50a95">
+
